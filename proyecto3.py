@@ -4,7 +4,7 @@ def ingresarDatos():
         nombrePasajero= input("Ingrese su nombre por favor: ")
 
         while True: 
-            rut = input("ingrese su rut SIN GUIÓN: ")
+            rut = input("Ingrese su rut SIN GUIÓN: ")
             if (len(rut) == 9 or len(rut) == 8) and rut not in storage:
                 break
             elif len(rut) != 9 and len(rut) != 8:
@@ -130,12 +130,14 @@ while op != "X":
             num = input("Usted seleccionó la opción de anular vuelo. Indique el asiento que compró por favor.")
             if num in matrix:
                 print("Asiento no ha sido reservado.")
+                continue 
             rut_prueba = input("Ingrese su RUT. ")
+            if rut_prueba not in storage:
+                print("Este RUT no está registrado.")
+                continue 
             print(anularAsiento(matrix,og_matrix,num))
-            if rut_prueba in storage:
-                del storage[rut_prueba]
-            else:
-                print("Rut no guardado.")
+            del storage[rut_prueba]
+            print(storage)
 
         
         if op == "4":
