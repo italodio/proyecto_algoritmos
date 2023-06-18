@@ -167,4 +167,4 @@ while op != "X":
                 break
 
 print("Ha salido exitosamente del programa.")
-print("Autores: Italo Inocencio.\nSamuel Campos.\n Jaime Paz.")
+print("Autores: Italo Inocencio.\nSamuel Campos.\nJaime Paz.")
