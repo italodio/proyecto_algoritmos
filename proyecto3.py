@@ -104,7 +104,7 @@ while op != "X":
     print("4.- Modificar datos.")
     print("5.- Salir.")
 
-    op = input("OP: ")
+    op = input("Seleccione su opción: ")
 
     if op == "1":
         printMatrix(matrix)
@@ -167,6 +167,9 @@ while op != "X":
             op = op.upper()
             if op == "X":
                 break
-
+            
+        if op != "1" and op != "2" and op != "3" and op != "4" and op != "5":
+            print("Opción ingresada incorrectamente.")
+        
 print("Ha salido exitosamente del programa.")
 print("Autores: Italo Inocencio.\nSamuel Campos.\nJaime Paz.")
