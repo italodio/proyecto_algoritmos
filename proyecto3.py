@@ -2,21 +2,23 @@ import numpy as np
 
 def ingresarDatos():
         nombrePasajero= input("Ingrese su nombre por favor: ")
-        rut = input("Ingrese rut sin guión ")
-        while rut in storage:
-            rut = input("Rut ya ingresado, ingrese otro.")
+
         while True: 
             rut = input("ingrese su rut SIN GUIÓN: ")
-            if len(rut) == 9 or rut == 8:
+            if (len(rut) == 9 or len(rut) == 8) and rut not in storage:
                 break
+            elif len(rut) != 9 and len(rut) != 8:
+                print("Largo de RUT inválido.")
+            elif rut in storage:
+                print("RUT ya ingresado.")
+        
         bancoPasajero = input("Ingrese su banco: ")
 
-        while True: ##
-            fonoPasajero = int(input("Ingrese su Numero: "))
-            if fonoPasajero >= 10**8 and fonoPasajero < 10**9:
+        while True:
+            fonoPasajero = (input("Ingrese su Numero: (8 dígitos) "))
+            if len(fonoPasajero) == 8:
                 break
-
-        fonoPasajero = input("Ingrese su número:")
+        fonoPasajero = "+56 9 " + fonoPasajero
         storage[rut] = [nombrePasajero,bancoPasajero,fonoPasajero,num]
         print(storage)
         return nombrePasajero,rut,bancoPasajero,fonoPasajero
