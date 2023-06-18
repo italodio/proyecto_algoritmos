@@ -19,7 +19,7 @@ def ingresarDatos():
             if len(fonoPasajero) == 8:
                 break
         fonoPasajero = "+56 9 " + fonoPasajero
-        storage[rut] = [nombrePasajero,bancoPasajero,fonoPasajero,num]
+        storage[rut] = {'NOMBRE': nombrePasajero,'BANCO': bancoPasajero,'FONO':fonoPasajero,'ASIENTO': num}
         print(storage)
         return nombrePasajero,rut,bancoPasajero,fonoPasajero
 
@@ -127,34 +127,36 @@ while op != "X":
                 print("Rut ya ingresado.")
     
         if op == "3":
-            try:
-                num = input("Usted seleccionó la opción de anular vuelo. Indique el asiento que compró por favor.")
-                if num in matrix:
-                    print("Asiento no ha sido reservado.")
-                rut_prueba = input("Ingrese su RUT. ")
-                print(anularAsiento(matrix,og_matrix,num))
-                if rut_prueba in storage:
-                    del storage[rut]
-                else:
-                    print("Rut no guardado.")
-            except TypeError:
-                print("Datos no congruentes.") #????
+            num = input("Usted seleccionó la opción de anular vuelo. Indique el asiento que compró por favor.")
+            if num in matrix:
+                print("Asiento no ha sido reservado.")
+            rut_prueba = input("Ingrese su RUT. ")
+            print(anularAsiento(matrix,og_matrix,num))
+            if rut_prueba in storage:
+                del storage[rut_prueba]
+            else:
+                print("Rut no guardado.")
+
         
         if op == "4":
             num = input("Usted seleccionó la opción de modificar datos, ingrese su número de asiento por favor.")
             rut_prueba = input("Ingrese su RUT. ")
-            if num not in matrix and (storage[rut_prueba] == [nombrePasajero,bancoPasajero,fonoPasajero,num]): #DEJA CAMBIAR SOLO EL ÚLTIMO
+            if num not in matrix and rut_prueba in storage and storage[rut_prueba]['ASIENTO'] == num: #DEJA CAMBIAR SOLO EL ÚLTIMO
                 op = input("Debe elegir una opción para modificar, tenemos permitido modificar su nombre o su teléfono. Eliga 1 o 2 respectivamente.")
                 while op != "1" and op != "2":
                     op = input("Opción incorrecta. Ingrese 1 o 2.")
                 if op == "1":
                     nombrePasajero = input("Ingrese el nombre al cual desea cambiar.")
-                    storage[rut_prueba] = [nombrePasajero,bancoPasajero,fonoPasajero,num]
+                    storage[rut_prueba]['NOMBRE'] = nombrePasajero
                     print(storage)    
                 if op == "2":
-                    fonoPasajero = input("Ingrese el fono al cual desea cambiar.")
-                    storage[rut_prueba] = [nombrePasajero,bancoPasajero,fonoPasajero,num]
-                    print(storage)           
+                    while True:
+                        fonoPasajero = input("Ingrese el fono al cual desea cambiar: (8 dígitos)")
+                        if len(fonoPasajero) == 8:
+                            break
+                fonoPasajero = "+56 9 " + fonoPasajero          
+                storage[rut_prueba]['FONO'] = fonoPasajero
+                print(storage)           
             else:
                 print("Datos no congruentes.")
 
@@ -165,3 +167,4 @@ while op != "X":
                 break
 
 print("Ha salido exitosamente del programa.")
+print("Autores: Italo Inocencio.\nSamuel Campos.\n Jaime Paz.")
